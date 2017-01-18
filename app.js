@@ -7,7 +7,8 @@
     lunchCheckController.$inject=['$scope', '$filter'];
     function lunchCheckController($scope, $filter){
         $scope.lunch="";
-        //$scope.lunchList=[];
+        var messages=['Please enter data first',"Too much!","Enjoy!"];
+   
         $scope.processLunch=function(){
             var lunchList=[];
             var temp=$scope.lunch.split(",");
@@ -17,17 +18,19 @@
                     lunchList.push(menu);
                 }
             }
-            //$scope.lunchList=lunchList;
+            
             $scope.lunch=lunchList.join(',');
             if(lunchList.length==0){
-                $scope.message="Please enter data first";
+                $scope.msgIdx=0;
             }
             else if(lunchList.length>3){
-                $scope.message="Too much!";
+                $scope.msgIdx=1;
             }
             else{
-                $scope.message="Enjoy!";
+                $scope.msgIdx=2;
             }
+
+            $scope.message=messages[$scope.msgIdx];
         }
     }
 })();
